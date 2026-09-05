@@ -1,0 +1,1 @@
+// Notification queue resources.
