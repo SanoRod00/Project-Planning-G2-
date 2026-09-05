@@ -1,1 +1,1 @@
-export function startSweepTimer() {}
+export function startSweepTimer() { }

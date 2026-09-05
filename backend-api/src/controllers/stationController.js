@@ -1,3 +1,3 @@
-export function callNext() {}
-export function markServed() {}
-export function markNoShow() {}
+export function callNext() { }
+export function markServed() { }
+export function markNoShow() { }

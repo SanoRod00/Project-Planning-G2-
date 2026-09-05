@@ -1,3 +1,3 @@
 export async function handler(event) {
-  return { batchItemFailures: [], received: event?.Records?.length || 0 };
+    return { batchItemFailures: [], received: event?.Records?.length || 0 };
 }

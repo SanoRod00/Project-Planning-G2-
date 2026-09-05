@@ -1,9 +1,9 @@
 {
-  "name": "SharijaVuba Rider",
-  "short_name": "SharijaVuba",
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#0f766e",
-  "background_color": "#f8fafc",
-  "icons": []
+    "name": "SharijaVuba Rider",
+    "short_name": "SharijaVuba",
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#0f766e",
+    "background_color": "#f8fafc",
+    "icons": []
 }

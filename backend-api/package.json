@@ -1,7 +1,15 @@
 {
-  "name": "@sharijavuba/backend-api",
-  "private": true,
-  "type": "module",
-  "scripts": { "dev": "node --watch src/index.js", "start": "node src/index.js", "test": "node --test" },
-  "dependencies": { "express": "latest", "pg": "latest", "@aws-sdk/client-sqs": "latest" }
+    "name": "@sharijavuba/backend-api",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "node --watch src/index.js",
+        "start": "node src/index.js",
+        "test": "node --test"
+    },
+    "dependencies": {
+        "express": "latest",
+        "pg": "latest",
+        "@aws-sdk/client-sqs": "latest"
+    }
 }

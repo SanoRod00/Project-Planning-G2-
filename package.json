@@ -1,14 +1,14 @@
 {
-  "name": "sharijavuba",
-  "private": true,
-  "workspaces": [
-    "rider-pwa",
-    "station-dashboard",
-    "backend-api",
-    "notification-lambda"
-  ],
-  "scripts": {
-    "dev": "npm run dev --workspaces --if-present",
-    "test": "npm test --workspaces --if-present"
-  }
+    "name": "sharijavuba",
+    "private": true,
+    "workspaces": [
+        "rider-pwa",
+        "station-dashboard",
+        "backend-api",
+        "notification-lambda"
+    ],
+    "scripts": {
+        "dev": "npm run dev --workspaces --if-present",
+        "test": "npm test --workspaces --if-present"
+    }
 }

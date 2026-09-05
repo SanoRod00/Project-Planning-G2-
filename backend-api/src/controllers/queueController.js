@@ -1,3 +1,3 @@
-export function reserve() {}
-export function cancel() {}
-export function position() {}
+export function reserve() { }
+export function cancel() { }
+export function position() { }

@@ -1,2 +1,2 @@
-export function appendEvent() {}
-export function claimNext() {}
+export function appendEvent() { }
+export function claimNext() { }

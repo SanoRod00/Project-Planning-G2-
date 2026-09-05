@@ -1,1 +1,1 @@
-export function dispatchNotification() {}
+export function dispatchNotification() { }

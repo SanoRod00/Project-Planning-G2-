@@ -1,7 +1,11 @@
 {
-  "name": "@sharijavuba/notification-lambda",
-  "private": true,
-  "type": "module",
-  "scripts": { "test": "node --test" },
-  "dependencies": { "@aws-sdk/client-sns": "latest" }
+    "name": "@sharijavuba/notification-lambda",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "test": "node --test"
+    },
+    "dependencies": {
+        "@aws-sdk/client-sns": "latest"
+    }
 }

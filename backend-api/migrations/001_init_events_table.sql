@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS events (
 );
 
 CREATE TABLE IF NOT EXISTS claims (
-  rider_id TEXT PRIMARY KEY,
-  status TEXT NOT NULL,
-  position INTEGER,
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    rider_id TEXT PRIMARY KEY,
+    status TEXT NOT NULL,
+    position INTEGER,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
