@@ -20,7 +20,6 @@ npm install
 docker compose up -d
 npm run dev
 ```
-
 ## Links
 
 - `High-Level System Architecture`: [Miro](https://miro.com/app/board/uXjVGA8fXmU=/?share_link_id=926089005134).
