@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="5z_UwwDbIrslRLN79WAG">
+    <mxGraphModel dx="2318" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1030" pageHeight="527" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="users" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1;align=left;verticalAlign=top;spacing=10;" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:13px;&quot;&gt;Users&lt;/div&gt;&lt;div style=&quot;text-align: center; font-style: italic; color: rgb(85, 85, 85); font-size: 10px;&quot;&gt;People who send, receive, or process money&lt;/div&gt;&lt;div style=&quot;height:6px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-family:monospace;font-size:11px;white-space:pre;line-height:19px;margin-top:8px;&quot;&gt;PK user_id         INT &lt;br&gt;   name            VARCHAR(200)&lt;br&gt;   phone           VARCHAR(32) UNIQUE&lt;br&gt;   masked_phone    VARCHAR(32)&lt;br&gt;   account_number  VARCHAR(64)&lt;br&gt;   created_at      DATETIME&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="280" x="-40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="smsraw" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1;align=left;verticalAlign=top;spacing=10;" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:13px;&quot;&gt;SMS_Raw&lt;/div&gt;&lt;div style=&quot;text-align: center; font-style: italic; color: rgb(85, 85, 85); font-size: 10px;&quot;&gt;Untouched incoming MoMo SMS messages&lt;/div&gt;&lt;div style=&quot;height:6px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-family:monospace;font-size:11px;white-space:pre;line-height:19px;margin-top:8px;&quot;&gt;PK sms_id           INT&lt;br&gt;   address          VARCHAR(50)&lt;br&gt;   date_epoch       BIGINT&lt;br&gt;   date_sent_epoch  BIGINT&lt;br&gt;   readable_date    VARCHAR(50)&lt;br&gt;   body             TEXT&lt;br&gt;   service_center   VARCHAR(20)&lt;br&gt;   contact_name     VARCHAR(100)&lt;br&gt;   raw_fields       JSON&lt;br&gt;   imported_at      DATETIME&lt;/div&gt;" vertex="1">
+          <mxGeometry height="260" width="280" x="-40" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1;align=left;verticalAlign=top;spacing=10;" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:13px;&quot;&gt;Transactions&lt;/div&gt;&lt;div style=&quot;text-align:center;font-style:italic;color:#555555;font-size:10px;&quot;&gt;One parsed, structured financial transaction&lt;/div&gt;&lt;div style=&quot;height:6px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-family:monospace;font-size:10.5px;white-space:pre;line-height:19px;margin-top:8px;&quot;&gt;PK transaction_id        VARCHAR(64)&lt;br/&gt;FK sms_id                INT&lt;br/&gt;FK category_id           INT&lt;br/&gt;   amount                DECIMAL(18,2)&lt;br/&gt;   currency              CHAR(3)&lt;br/&gt;   fee                   DECIMAL(18,2)&lt;br/&gt;   balance_after         DECIMAL(18,2)&lt;br/&gt;   status                VARCHAR(20)&lt;br/&gt;   transaction_datetime  DATETIME&lt;br/&gt;   external_tx_id        VARCHAR(64)&lt;br/&gt;   raw_message           TEXT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="280" width="320" x="420" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="categories" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1;align=left;verticalAlign=top;spacing=10;" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:13px;&quot;&gt;Transaction_Categories&lt;/div&gt;&lt;div style=&quot;text-align: center; font-style: italic; color: rgb(85, 85, 85); font-size: 10px;&quot;&gt;Lookup: deposit, transfer, payment, airtime...&lt;/div&gt;&lt;div style=&quot;height:6px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-family:monospace;font-size:11px;white-space:pre;line-height:19px;margin-top:8px;&quot;&gt;PK category_id  INT &lt;br&gt;   code         VARCHAR(50)&lt;br&gt;   name         VARCHAR(100)&lt;br&gt;   description  TEXT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="270" x="950" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="participants" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1;align=left;verticalAlign=top;spacing=10;" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:13px;&quot;&gt;Transaction_Participants (junction)&lt;/div&gt;&lt;div style=&quot;text-align: center; font-style: italic; color: rgb(85, 85, 85); font-size: 10px;&quot;&gt;Links Users to Transactions, with a role&lt;/div&gt;&lt;div style=&quot;height:6px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-family:monospace;font-size:11px;white-space:pre;line-height:19px;margin-top:8px;&quot;&gt;PK participant_id     INT &lt;br&gt;FK transaction_id     VARCHAR(64)&lt;br&gt;FK user_id            INT&lt;br&gt;   role               VARCHAR(20)&lt;br&gt;   participant_phone  VARCHAR(32)&lt;br&gt;   participant_name   VARCHAR(200)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="340" x="420" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="logs" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1;align=left;verticalAlign=top;spacing=10;" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:13px;&quot;&gt;System_Logs&lt;/div&gt;&lt;div style=&quot;text-align: center; font-style: italic; color: rgb(85, 85, 85); font-size: 10px;&quot;&gt;OTPs, reversals, and processing events&lt;/div&gt;&lt;div style=&quot;height:6px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-family:monospace;font-size:11px;white-space:pre;line-height:19px;margin-top:8px;&quot;&gt;PK log_id          INT &lt;br&gt;   timestamp       DATETIME&lt;br&gt;   level           VARCHAR(10)&lt;br&gt;   source          VARCHAR(100)&lt;br&gt;   message         TEXT&lt;br&gt;   details         JSON&lt;br&gt;FK transaction_id  VARCHAR(64) NULL&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="290" x="900" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="smsraw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;startArrow=none;startFill=0;endArrow=block;endFill=1;exitX=1;exitY=0.12;exitDx=0;exitDy=0;entryX=0;entryY=0.93;entryDx=0;entryDy=0;" target="transactions" value="1 : 1">
+          <mxGeometry relative="1" x="0.1384" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="355" y="350" />
+              <mxPoint x="355" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="categories" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;startArrow=none;startFill=0;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" target="transactions" value="1 : M">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="transactions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;startArrow=none;startFill=0;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="participants" value="1 : M">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;startArrow=none;startFill=0;endArrow=block;endFill=1;exitX=1;exitY=0.9;exitDx=0;exitDy=0;entryX=0;entryY=0.15;entryDx=0;entryDy=0;" target="participants" value="1 : M">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0.3" as="offset" />
+            <Array as="points">
+              <mxPoint x="395" y="190" />
+              <mxPoint x="395" y="452" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="transactions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;startArrow=none;startFill=0;endArrow=block;endFill=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="logs" value="1 : M">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
