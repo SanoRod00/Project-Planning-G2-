@@ -132,6 +132,25 @@ CREATE INDEX idx_logs_level ON system_logs (level);
 
 CREATE INDEX idx_logs_tx ON system_logs (transaction_id);
 
+USE momo_sms_db;
+
+-- 1. Transaction_Categories 
+INSERT INTO transaction_categories (code, name, description) VALUES
+('DEPOSIT',     'Cash Deposit',          'Money deposited into a mobile account by agent or bank'),
+('TRANSFER',    'Peer Transfer',         'Money sent directly from one registered user to another'),
+('PAYMENT',     'Merchant Payment',      'Payment made to a business or merchant code'),
+('WITHDRAWAL',  'Cash Withdrawal',       'Money withdrawn as cash to an agent'),
+('AIRTIME',     'Airtime Purchase',      'Airtime bought using mobile money balance'),
+('BUNDLE',      'Data Bundle Purchase',  'Internet/data bundle bought using mobile money balance'),
+
+--2. Users
+INSERT INTO users (name, phone, masked_phone, account_number) VALUES
+('Alice Uwase',      '250791111111', NULL,             NULL),
+('Jean Bosco',       '250792222222', NULL,             NULL),
+('Marie Claire',     NULL,           '*********013',   NULL),
+('Eric Niyonzima',   '250794444444', NULL,              'AGT-4021'),
+('Grace Iradukunda', NULL,           '*********099',   NULL),
+('MTN Airtime Merchant', NULL,       NULL,              'MERCH-8890');
 -- ============================================================================
 -- END OF SCHEMA HALF
 -- below this point in the same database_setup.sql — no need to re-run
