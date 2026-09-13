@@ -31,6 +31,39 @@ Incoming MoMo SMS -> raw message capture -> transaction parsing -> categorisatio
 
 This creates a reliable foundation for tracking financial activity, queue-related events, and system operations in a structured way.
 
+## Database Schema Validation
+
+The schema (`database/database_setup.sql`) was implemented from the ERD above and tested against a live MySQL instance (Aiven Cloud, MySQL 8.0.45) before being handed off for sample data population.
+
+### What was verified
+
+1. **Script executes error-free** — all 6 tables (`sms_raw`, `system_logs`, `transaction_categories`, `transaction_participants`, `transactions`, `users`) create successfully in dependency order, with no FK or syntax errors.
+2. **All constraints register correctly** — confirmed via `information_schema.TABLE_CONSTRAINTS`, showing 21 constraints across the 6 tables (6 PRIMARY KEYs, 3 UNIQUE constraints, 5 FOREIGN KEYs, and several CHECK constraints).
+3. **CHECK constraints are enforced**, not just declared — a deliberate attempt to insert a negative transaction amount was rejected:
+   > `Check constraint 'chk_tx_amount' is violated.`
+4. **FOREIGN KEY constraints are enforced** — a deliberate attempt to insert a transaction referencing a nonexistent `category_id` was rejected:
+   > `Cannot add or update a child row: a foreign key constraint fails ("momo_sms_db"."transactions", CONSTRAINT "fk_tx_category" FOREIGN KEY ("category_id") REFERENCES "transaction_categories" ("category_id") ON DELETE RESTRICT)`
+5. **Valid CRUD operations succeed** — a correctly formed transaction insert was accepted and confirmed via `SELECT`.
+
+All test rows were removed after verification so the database is clean for sample data population.
+
+### Screenshots
+
+**Tables created (`SHOW TABLES`)**
+![Tables created](docs/database/screenshots/01-tables-created.png)
+
+**Constraints registered (`information_schema.TABLE_CONSTRAINTS`)**
+![Constraints list](docs/database/screenshots/02-constraints-list.png)
+
+**CHECK constraint rejection**
+![CHECK constraint rejection](docs/database/screenshots/03-check-constraint-fail.png)
+
+**FOREIGN KEY constraint rejection**
+![Foreign key rejection](docs/database/screenshots/04-foreign-key-fail.png)
+
+**Valid insert + select**
+![Valid insert](docs/database/screenshots/05-valid-insert.png)
+
 ## Local development
 
 Prerequisites: Node.js 20+, Docker, and Terraform for infrastructure work.
