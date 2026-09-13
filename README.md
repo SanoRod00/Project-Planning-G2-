@@ -45,6 +45,7 @@ npm run dev
 
 - `High-Level System Architecture`: [Miro](https://miro.com/app/board/uXjVGA8fXmU=/?share_link_id=926089005134)
 - `Board Setup`: [Trello](https://trello.com/invite/b/6a9bbeaa0d6c81f1fee0e953/ATTIaa8f1d3d5cd4f826621fe387297fb3d9D4FF2364/sharijavubabatteryqueue)
+- `Database Design and Implementation (Activity 2)`: [Trello](https://trello.com/invite/b/6aa67b3e7312be360bcb591c/ATTIe64a0fac39602330823f04ffa85d4b4b40C76BB9/database-design-and-implementationg2)
 - `Project Files and Assets`: [Google Drive](https://drive.google.com/file/d/1EixXPlCT5E-BhVtw5jWc8uf2n2ZKBZig/view?usp=sharing) — shared project documents, diagrams, and supporting materials
 
 See each service folder's `package.json` and relevant configuration files for service-specific setup details.
