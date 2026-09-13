@@ -151,7 +151,43 @@ INSERT INTO users (name, phone, masked_phone, account_number) VALUES
 ('Eric Niyonzima',   '250794444444', NULL,              'AGT-4021'),
 ('Grace Iradukunda', NULL,           '*********099',   NULL),
 ('MTN Airtime Merchant', NULL,       NULL,              'MERCH-8890');
--- ============================================================================
--- END OF SCHEMA HALF
--- below this point in the same database_setup.sql — no need to re-run
--- CREATE DATABASE / USE again if run in the same session.
+
+-- 3. sms_raw (6 records)
+INSERT INTO sms_raw (address, date_epoch, date_sent_epoch, readable_date, body, service_center, contact_name) VALUES
+('M-Money', 1717230000000, 1717230001000, '1 June 2024 8:00:00 AM', 'You have received 50000 RWF from Jean Bosco (250792222222). Your new balance is 125000 RWF. TxId: 71000001', '+250788110001', 'M-Money'),
+('M-Money', 1717233600000, 1717233601000, '1 June 2024 9:00:00 AM', 'You have sent 20000 RWF to Marie Claire (*********013). Fee 200 RWF. Your new balance is 104800 RWF. TxId: 71000002', '+250788110001', 'M-Money'),
+('M-Money', 1717237200000, 1717237201000, '1 June 2024 10:00:00 AM', 'Payment of 15000 RWF to MTN Airtime Merchant (MERCH-8890) completed. Your new balance is 89800 RWF. TxId: 71000003', '+250788110001', 'M-Money'),
+('M-Money', 1717240800000, 1717240801000, '1 June 2024 11:00:00 AM', 'You have withdrawn 30000 RWF via agent Eric Niyonzima (AGT-4021). Fee 500 RWF. Your new balance is 59300 RWF. TxId: 71000004', '+250788110001', 'M-Money'),
+('M-Money', 1717244400000, 1717244401000, '1 June 2024 12:00:00 PM', 'Airtime purchase of 2000 RWF successful. Your new balance is 57300 RWF. TxId: 71000005', '+250788110001', 'M-Money'),
+('M-Money', 1717248000000, NULL,           '1 June 2024 1:00:00 PM', 'Transaction of 10000 RWF to Grace Iradukunda (*********099) FAILED due to insufficient funds. TxId: 71000006', '+250788110001', 'M-Money');
+
+-- 4. transactions (6 records) — sms_id follows the AUTO_INCREMENT order above (1-6)
+INSERT INTO transactions (transaction_id, sms_id, category_id, amount, fee, balance_after, status, transaction_datetime, raw_message) VALUES
+('71000001', 1, 1, 50000.00, 0.00,   125000.00, 'COMPLETED', '2024-06-01 08:00:00', 'You have received 50000 RWF from Jean Bosco...'),
+('71000002', 2, 2, 20000.00, 200.00, 104800.00, 'COMPLETED', '2024-06-01 09:00:00', 'You have sent 20000 RWF to Marie Claire...'),
+('71000003', 3, 3, 15000.00, 0.00,   89800.00,  'COMPLETED', '2024-06-01 10:00:00', 'Payment of 15000 RWF to MTN Airtime Merchant...'),
+('71000004', 4, 4, 30000.00, 500.00, 59300.00,  'COMPLETED', '2024-06-01 11:00:00', 'You have withdrawn 30000 RWF via agent...'),
+('71000005', 5, 5, 2000.00,  0.00,   57300.00,  'COMPLETED', '2024-06-01 12:00:00', 'Airtime purchase of 2000 RWF successful...'),
+('71000006', 6, 2, 10000.00, 0.00,   NULL,      'FAILED',    '2024-06-01 13:00:00', 'Transaction of 10000 RWF to Grace Iradukunda FAILED...');
+
+-- 5. transaction_participants (10 records — sender/receiver/agent per transaction)
+INSERT INTO transaction_participants (transaction_id, user_id, role, participant_phone, participant_name) VALUES
+('71000001', 2, 'SENDER',   '250792222222', 'Jean Bosco'),
+('71000001', 1, 'RECEIVER', '250791111111', 'Alice Uwase'),
+('71000002', 1, 'SENDER',   '250791111111', 'Alice Uwase'),
+('71000002', 3, 'RECEIVER', '*********013', 'Marie Claire'),
+('71000003', 1, 'SENDER',   '250791111111', 'Alice Uwase'),
+('71000003', 6, 'RECEIVER', 'MERCH-8890',   'MTN Airtime Merchant'),
+('71000004', 1, 'SENDER',   '250791111111', 'Alice Uwase'),
+('71000004', 4, 'AGENT',    'AGT-4021',     'Eric Niyonzima'),
+('71000005', 1, 'SELF',     '250791111111', 'Alice Uwase'),
+('71000006', 1, 'SENDER',   '250791111111', 'Alice Uwase');
+
+-- 6. system_logs (5 records)
+INSERT INTO system_logs (level, source, message, transaction_id) VALUES
+('INFO',  'parse_xml.py',   'Successfully parsed and inserted transaction 71000001', '71000001'),
+('INFO',  'parse_xml.py',   'Successfully parsed and inserted transaction 71000002', '71000002'),
+('INFO',  'parse_xml.py',   'Successfully parsed and inserted transaction 71000003', '71000003'),
+('WARN',  'parse_xml.py',   'Transaction 71000006 marked FAILED, balance_after left NULL', '71000006'),
+('ERROR', 'load_users.py',  'Could not fully resolve phone number for participant in SMS batch 6', NULL);
+
