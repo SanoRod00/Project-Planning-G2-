@@ -47,6 +47,12 @@ The schema (`database/database_setup.sql`) was implemented from the ERD above an
 
 All test rows were removed after verification so the database is clean for sample data population.
 
+## JSON Data Modeling
+
+The REST-style JSON representations, including a complete nested transaction
+and the SQL-to-JSON mapping, are documented in
+[docs/momo-json-data-modeling.md](docs/momo-json-data-modeling.md).
+
 ### Screenshots
 
 **Tables created (`SHOW TABLES`)**
